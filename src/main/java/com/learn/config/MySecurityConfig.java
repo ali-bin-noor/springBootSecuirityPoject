@@ -17,6 +17,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter
     protected void configure(HttpSecurity http) throws Exception
     {
      http
+             .csrf().disable()
              .authorizeRequests()
              .antMatchers("/public/**").hasRole("NORMAL")
              .antMatchers("/users/**").hasRole("ADMIN")

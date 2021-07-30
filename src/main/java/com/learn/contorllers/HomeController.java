@@ -25,6 +25,4 @@ public class HomeController
     {
         return  "This is register page";
     }
-
-
 }
