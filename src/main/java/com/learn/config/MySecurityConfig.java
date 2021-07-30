@@ -18,20 +18,28 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter
     {
      http
              .authorizeRequests()
-             .antMatchers("/public/**").permitAll()
+             .antMatchers("/public/**").hasRole("NORMAL")
+             .antMatchers("/users/**").hasRole("ADMIN")
              .anyRequest()
              .authenticated()
              .and()
              .httpBasic();
     }
 
+    //assigning custom username ,password and roles
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception
     {
         auth.inMemoryAuthentication().withUser("root").password(this.passwordEncoder().encode("root")).roles("NORMAL");
-        auth.inMemoryAuthentication().withUser("ali").password(this.passwordEncoder().encode("ali")).roles("ADMIN");
+        auth.inMemoryAuthentication().withUser("admin").password(this.passwordEncoder().encode("admin")).roles("ADMIN","NORMAL");
     }
+    //Role-High Level Overview ->Normal :READ
+    //Authority - permission- READ
+    //ADMIN-READ,WRITE AND UPDATE
 
+
+
+    //Encrypting the password
     @Bean
     public PasswordEncoder passwordEncoder()
     {

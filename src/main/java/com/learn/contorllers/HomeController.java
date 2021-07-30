@@ -19,7 +19,7 @@ public class HomeController
     {
         return  "This is login page";
     }
-    
+
     @GetMapping("/register")
     public String register()
     {
